@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.resource
 
-//import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json
 
 interface Dependencies {
     val pictures: SnapshotStateList<PictureData>
@@ -21,7 +21,7 @@ interface Dependencies {
     val localization: Localization
     val imageRepository: ContentRepository<ImageBitmap>
     val notification: Notification
-//    val json: Json get() = jsonReader
+    val json: Json get() = jsonReader
 }
 
 interface Notification {
@@ -79,9 +79,9 @@ interface Localization {
     val refreshUnavailable: String
 }
 
-//private val jsonReader: Json = Json {
-//    ignoreUnknownKeys = true
-//}
+private val jsonReader: Json = Json {
+    ignoreUnknownKeys = true
+}
 
 interface ImageProvider {
     suspend fun getImage(picture: PictureData): ImageBitmap

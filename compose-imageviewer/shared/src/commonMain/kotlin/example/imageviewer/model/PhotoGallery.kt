@@ -8,6 +8,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.builtins.ListSerializer
 import kotlin.jvm.JvmInline
 
 
@@ -62,14 +63,13 @@ class PhotoGallery(val deps: Dependencies) {
     """.trimIndent()
 
     private suspend fun getNewPictures(dependencies: Dependencies): List<GalleryEntryWithMetadata> {
-//        val pictures = dependencies.json.decodeFromString(
-//            ListSerializer(Picture.serializer()),
-//            dependencies.httpClient.get(PICTURES_DATA_URL).bodyAsText()
-//        )
-        val pictures = (1..13).map {
-            Picture("$it.jpg", "small/$it.jpg")
-        }
-
+        val pictures = dependencies.json.decodeFromString(
+            ListSerializer(Picture.serializer()),
+            dependencies.httpClient.getAsBytes(PICTURES_DATA_URL).decodeToString()
+        )
+//        val pictures = (1..13).map {
+//            Picture("$it.jpg", "small/$it.jpg")
+//        }
         val miniatures = pictures
             .map { picture ->
                 dependencies.ioScope.async {
