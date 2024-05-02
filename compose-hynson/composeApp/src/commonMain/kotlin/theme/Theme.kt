@@ -88,6 +88,7 @@ internal val LocalAppColor = compositionLocalOf {
 
 @Composable
 internal fun AppTheme(
+    typography: Typography? = null,
     content: @Composable() () -> Unit
 ) {
     val systemIsDark = isSystemInDarkTheme()
@@ -117,7 +118,7 @@ internal fun AppTheme(
                 },
                 isDark = isDark
             ),
-            typography = AppTypography,
+            typography = typography ?: AppTypography,
             shapes = AppShapes,
             content = {
                 Surface(content = content)
