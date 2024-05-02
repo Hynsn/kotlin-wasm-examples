@@ -13,7 +13,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
             }
         }
     }
@@ -64,8 +64,10 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
             implementation(compose.ui)
-            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(libs.materialKolor)
             implementation(compose.components.resources)
         }
     }
@@ -73,7 +75,7 @@ kotlin {
 
 android {
     namespace = "org.example.project"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 34
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -81,8 +83,8 @@ android {
 
     defaultConfig {
         applicationId = "org.example.project"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk = 24
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -97,8 +99,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        compose = true
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)

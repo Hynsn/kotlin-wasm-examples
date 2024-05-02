@@ -1,4 +1,4 @@
-rootProject.name = "compose-example"
+rootProject.name = "compose-hynson"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -6,6 +6,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -13,6 +14,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
